@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { RecipesService } from './recipes.service';
+import { RecipesListService } from './recipes-list.service';
 import { Recipe } from './recipe';
 
 @Component({
   selector: 'app-recipes',
-  templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css']
+  templateUrl: './recipes-list.component.html',
+  styleUrls: ['./recipes-list.component.css']
 })
-export class RecipesComponent implements OnInit {
+export class RecipesListComponent implements OnInit {
   displayedColumns: string[] = ['id', /*'userId',*/ 'recipeTitle', /*'ingredients', 'howToPrepare',*/ 'timeToPrepareInMinutes', 'calories', /*'nutritionalValue', 'additionalInfo',*/ 'glutenFree', 'vegan', 'diabeticFriendly', 'riskOfAllergies', /*'isFavorite'*/ 'edit', 'delete'];
   dataSource = new MatTableDataSource<any>();
 
   selectedRecipe: Recipe = new Recipe();
   loading = false;
 
-  constructor(public recipeService: RecipesService){
+  constructor(public recipeService: RecipesListService){
   }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class RecipesComponent implements OnInit {
 		}
 		this.selectedRecipe = new Recipe();
 		await this.refresh();
-	}  
+	}
 
 	editRecipe(recipe: Recipe){
 		this.selectedRecipe = recipe;
@@ -53,7 +53,11 @@ export class RecipesComponent implements OnInit {
 			this.recipeService.deleteRecipe(Number.parseInt(recipe.id));
 		}
 		await this.refresh();
-	}
+  }
+
+  getRecord(recipe : Recipe){
+    alert('Retriving');
+  }
 
 
 

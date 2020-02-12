@@ -5,12 +5,12 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const bearerToken = require('express-bearer-token');
 const recipe_1 = require("./recipe");
-// import {oktaAuth} from './auth'
+const auth_1 = require("./auth");
 const app = express()
     .use(cors())
     .use(bodyParser.json())
     .use(bearerToken())
-    //   .use(oktaAuth)
+    .use(auth_1.oktaAuth)
     .use(recipe_1.router);
 app.listen(4201, (err) => {
     if (err) {

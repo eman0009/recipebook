@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { OktaAuthService } from '@okta/okta-angular';
+import { OktaAuthService } from '@okta/okta-angular';
 import { Recipe } from './recipe';
 
 const baseUrl = 'http://localhost:4201';
@@ -8,14 +8,13 @@ const baseUrl = 'http://localhost:4201';
 @Injectable({
   providedIn: 'root'
 })
-export class RecipesService {
+export class RecipesListService {
 
-	constructor(/*public oktaAuth: OktaAuthService, */private http: HttpClient) {
+	constructor(public oktaAuth: OktaAuthService, private http: HttpClient) {
 	}
 
 	private async request(method: string, url: string, data?: any) {
-		// const token = await this.oktaAuth.getAccessToken();
-		console.log('REQUEST: ' + data);
+		const token = await this.oktaAuth.getAccessToken();
 
 		console.log('request ' + JSON.stringify(data));
 		const result = this.http.request(method, url, {
@@ -23,10 +22,10 @@ export class RecipesService {
 			responseType: 'json',
 			observe: 'body',
 			headers: {
-			// Authorization: `Bearer ${token}`
+			Authorization: `Bearer ${token}`
 			}
 		});
-		
+
 		return new Promise<any>((resolve, reject) => {
 			result.subscribe(resolve as any, reject as any);
 		});
@@ -52,6 +51,10 @@ export class RecipesService {
 
 	deleteRecipe(id: number) {
 		return this.request('delete', `${baseUrl}/recipes/${id}`);
-	}
+  }
+
+  getRecord(id: number){
+    console.log(id + ' cell clicked');
+  }
 
 }

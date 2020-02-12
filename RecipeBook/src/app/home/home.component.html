@@ -2,5 +2,19 @@
   <div>
     <h1>Recipe Book</h1>
     <p class="lead">Let's cook something!</p>
+
+    <input type="text" [(ngModel)]="ingredientToSearch" (keyup.enter)="searchRecipeByIngredient(ingredientToSearch)" placeholder="Search recipe by ingredient on Edaman API" size="50" required>
+    <!-- <a><input type="button" value="Search" (click)="searchRecipeByIngredient()"></a> -->
+    <button mat-flat-button color="primary" (click)="searchRecipeByIngredient(ingredientToSearch)"> Search </button>
+    <div class="loading" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+
+
+    <div>
+      <textarea matInput resizeToFitContent [(ngModel)]="recipesFound"></textarea>
+    </div>
+
+
   </div>
 </div>
