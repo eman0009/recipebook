@@ -1,20 +1,26 @@
-<div class="hero">
-  <div>
-    <h1>Recipe Book</h1>
-    <p class="lead">Let's cook something!</p>
-
-    <input type="text" [(ngModel)]="ingredientToSearch" (keyup.enter)="searchRecipeByIngredient(ingredientToSearch)" placeholder="Search recipe by ingredient on Edaman API" size="50" required>
-    <!-- <a><input type="button" value="Search" (click)="searchRecipeByIngredient()"></a> -->
-    <button mat-flat-button color="primary" (click)="searchRecipeByIngredient(ingredientToSearch)"> Search </button>
-    <div class="loading" *ngIf="loading">
-      <mat-spinner></mat-spinner>
-    </div>
-
-
-    <div>
-      <textarea matInput resizeToFitContent [(ngModel)]="recipesFound"></textarea>
-    </div>
-
-
-  </div>
+<div class="boarder">
+	<div class="heading_prompt">
+		<h1><a href="">Login</a> to find new recipes and get cooking!</h1>
+	</div>
+	
+	<div class="recommended_recipe">
+		<div id="image_block"></div>
+		<h2>Recommended Recipe:</h2>
+		<h3><a href="">Stale Bread</a></h3>
+		<p>This recipe blends the mouth-watering flavours of old food and plain flavourless bread to bring a</p>
+		<p>delicious new family-friendly recipe to your table! With only one ingredient this recipe will...</p>
+	</div>
+	
+	<div class="website_tip">
+		<h2>Website Tip:</h2>
+		<p>Click the "Weekly Planner" button located at</p>
+		<p>the top right of the page to visit the recipe</p>
+		<p>planner page! This page lets you create a</p>
+		<p>calendar and plan recipes to cook for specific</p>
+		<p>meals! You can then use the calendar when</p>
+		<p>grocery shopping to reference which ingredients</p>
+		<p>you need to buy for the weeks meals! <a href="">Click here</a></p>
+		<p>to try out the weekly planner!</p>
+	</div>
+	
 </div>
