@@ -1,3 +1,87 @@
-<p>
-  recipe works!
-</p>
+<div>
+<h2>{{(recipe.id!==undefined)?recipe.recipeTitle:'Create New Recipe'}}</h2>
+  <label>Title
+    <input type="text" [(ngModel)]="recipe.recipeTitle" required>
+  </label>
+  <label>Ingredients
+    <input type="text" [(ngModel)]="recipe.ingredients" required>
+    <button mat-icon-button (click)="addIngredient()">
+      <mat-icon>add</mat-icon>
+    </button>
+      <!-- <mat-icon>close</mat-icon> -->
+      <!-- <div *ngFor="recipe.ingredients"> -->
+      <table>
+        <thead>
+            <th>Ingredients</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ingredient of ingredientsInArray; let i = index">
+            <td><input type="text" name="ingredient_{{i}}" [(ngModel)]="ingredient" required></td>
+            <td>
+              <button mat-icon-button (click)="deleteIngredient(i,ingredient)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+
+        </tr>
+
+      </table>
+
+    <!-- </div> -->
+  </label>
+  <label>How To Prepare
+    <input type="text" [(ngModel)]="recipe.howToPrepare" required>
+  </label>
+  <label>Time to Prepare (Minutes)
+    <input type="number" [(ngModel)]="recipe.timeToPrepareInMinutes" required>
+  </label>
+  <label>Calories
+    <input type="text" [(ngModel)]="recipe.calories">
+  </label>
+  <label>Nutritional Value
+    <input type="text" [(ngModel)]="recipe.nutritionalValue">
+  </label>
+  <label>Additional Info
+    <input type="text" [(ngModel)]="recipe.additionalInfo">
+  </label>
+  <label>Gluten Free
+    <select name="glutenFree" [(ngModel)]="recipe.glutenFree" ngDefaultControl required>
+      <option disabled selected value> -- Select an option -- </option>
+      <option value=true>Yes</option>
+      <option value=false>No</option>
+    </select>
+  </label>
+  <label>Vegan
+    <select name="vegan" [(ngModel)]="recipe.vegan" ngDefaultControl required>
+      <option disabled selected value> -- Select an option -- </option>
+      <option value=true>Yes</option>
+      <option value=false>No</option>
+    </select>
+  </label>
+  <label>Diabetic Friendly
+    <select name="diabeticFriendly" [(ngModel)]="recipe.diabeticFriendly" ngDefaultControl required>
+      <option disabled selected value> -- Select an option -- </option>
+      <option value=true>Yes</option>
+      <option value=false>No</option>
+    </select>
+  </label>
+  <label>Risk Of Allergies
+    <select name="riskOfAllergies" [(ngModel)]="recipe.riskOfAllergies" required>
+      <option disabled selected value> -- Select an option -- </option>
+      <option value=true>Yes</option>
+      <option value=false>No</option>
+    </select>
+  </label>
+  <label>Favorite
+    <input type="checkbox" name="isFavorite" [(ngModel)]="recipe.isFavorite" [ngModelOptions]="{standalone: true}">
+  </label>
+  <!-- <button mat-flat-button color="primary" (click)="updateRecipe()">Create</button> -->
+  <button mat-flat-button color="primary" (click)="updateRecipe()">{{(recipe.id!==undefined)?'Update':'Create'}}</button>
+
+  <button mat-flat-button color="primary" (click)="clearRecipe()">Cancel</button>
+<div class="loading" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+</div>
+<my-app></my-app>

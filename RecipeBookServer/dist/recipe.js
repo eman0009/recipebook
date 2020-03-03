@@ -11,12 +11,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const model_1 = require("./model");
 // import {getMongoRepository, getMongoManager} from "typeorm";
+// import { OktaAuthService } from '@okta/okta-angular';
 exports.router = express_1.Router();
 exports.router.get('/recipes', function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const recipeRepository = yield model_1.getRecipeRepository();
-            const allRecipes = yield recipeRepository.find();
+            const allRecipes = yield recipeRepository.find({ where: { userId: req.body.user.email } });
             res.json(allRecipes);
         }
         catch (err) {
@@ -28,7 +29,7 @@ exports.router.get('/recipes/:id', function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const recipeRepository = yield model_1.getRecipeRepository();
-            const recipe = yield recipeRepository.find({ id: req.body.id });
+            const recipe = yield recipeRepository.findOne(req.params.id);
             res.json(recipe);
         }
         catch (err) {
@@ -109,7 +110,6 @@ exports.router.post('/recipes/:id', function (req, res, next) {
             // ${recipe.isFavorite}\n`);
             const result = yield recipeRepository.save(recipe);
             res.send(result);
-            // res.sendStatus(200);
         }
         catch (err) {
             return next(err);
@@ -120,9 +120,8 @@ exports.router.delete('/recipes/:id', function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const recipeRepository = yield model_1.getRecipeRepository();
-            yield recipeRepository.delete({ id: req.body.id });
-            // res.send('OK');
-            // res.sendStatus(201);
+            const result = yield recipeRepository.delete(req.params.id);
+            res.send(result);
         }
         catch (err) {
             return next(err);

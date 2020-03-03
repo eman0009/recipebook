@@ -4,6 +4,8 @@ import { JsonPipe } from '@angular/common';
 import { json } from 'express';
 import { element } from 'protractor';
 // import {MatInputModule} from '@angular/material/input';
+import { MatTableDataSource } from '@angular/material';
+
 
 
 @Component({
@@ -15,6 +17,9 @@ export class HomeComponent implements OnInit {
   ingredientToSearch : string;
   loading = false;
   recipesFound = [];
+
+  displayedColumns: string[] = ['title', 'calories', 'cautions', 'dietLabels', 'healthLabels', 'totalTime'];
+  dataSource = new MatTableDataSource<any>();
 
   constructor(public homeService: HomeService){
   }
@@ -32,10 +37,13 @@ export class HomeComponent implements OnInit {
       // var recipeJsonFim = JSON.parse(recipeJsonString);
 
       recipesFoundJson.hits.forEach(element => {
-        this.recipesFound.push(element);
+        this.recipesFound.push(element.recipe);
+        console.log(element.recipe);
+
 
       });
       console.log(this.recipesFound);
+      this.dataSource.data = this.recipesFound;
 
         // PAREI AQUI. MOSTRAR JSON NO TEXTAREA
         /**

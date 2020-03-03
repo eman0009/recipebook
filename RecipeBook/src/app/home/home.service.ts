@@ -12,7 +12,7 @@ const app_key = 'ac0f73f1eb2db79758869491d634e148';
 })
 export class HomeService {
 
-	constructor(public oktaAuth: OktaAuthService, private http: HttpClient) {
+	constructor(public oktaAuth: OktaAuthService, private http: HttpClient, ) {
 	}
 
 	private async request(method: string, url: string, data?: any) {
@@ -39,5 +39,12 @@ export class HomeService {
 
     return this.request('get', `${baseUrl}?q=${ingredient}&app_id=${app_id}&app_key=${app_key}`);
   }
+
+  // async user(){
+  //   const userClaims = await this.oktaAuth.getUser();
+
+  //   // user name is exposed directly as property
+  //   return userClaims.email;
+  // }
 
 }

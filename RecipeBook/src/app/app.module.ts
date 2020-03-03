@@ -9,18 +9,26 @@ import {
   MatMenuModule,
   MatProgressSpinnerModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatDialogModule,
+  MatDialogRef,
+  MatInputModule,
+  MatFormFieldControl
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OktaAuthModule } from '@okta/okta-angular';
+// import {DialogService} from './services/dialog.service';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MealPlannerComponent } from './meal-planner/meal-planner.component';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
-import { RecipeComponent } from './recipe/recipe.component';
+import { RecipeComponent, TesteDeArray } from './recipe/recipe.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +36,8 @@ import { RecipeComponent } from './recipe/recipe.component';
     HomeComponent,
     MealPlannerComponent,
     RecipesListComponent,
-    RecipeComponent
+    RecipeComponent,
+    TesteDeArray
   ],
   imports: [
     AppRoutingModule,
@@ -49,6 +58,11 @@ import { RecipeComponent } from './recipe/recipe.component';
       clientId: '0oa1a9g8grSMSPfQp4x6'
     }),
     FormsModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

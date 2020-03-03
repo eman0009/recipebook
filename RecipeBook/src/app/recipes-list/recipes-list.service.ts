@@ -9,21 +9,25 @@ const baseUrl = 'http://localhost:4201';
   providedIn: 'root'
 })
 export class RecipesListService {
+  currentUser = this.oktaAuth.getUser();
 
 	constructor(public oktaAuth: OktaAuthService, private http: HttpClient) {
 	}
 
 	private async request(method: string, url: string, data?: any) {
 		const token = await this.oktaAuth.getAccessToken();
+    console.log('request ' + JSON.stringify(data));
 
-		console.log('request ' + JSON.stringify(data));
 		const result = this.http.request(method, url, {
-			body: data,
+      body: data,
 			responseType: 'json',
 			observe: 'body',
 			headers: {
-			Authorization: `Bearer ${token}`
-			}
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        // userId: user
+      }
 		});
 
 		return new Promise<any>((resolve, reject) => {
@@ -31,12 +35,13 @@ export class RecipesListService {
 		});
 	}
 
-	getRecipes(){
-		return this.request('get', `${baseUrl}/recipes`);
+	async getRecipes(){
+		return this.request('get', `${baseUrl}/recipes`, this.currentUser);
 	}
 
-	getRecipe(id: string) {
-		return this.request('get', `${baseUrl}/recipes/${id}`);
+	async getRecipe(id: number) {
+		return this.request('get', `${baseUrl}/recipes/${id}`, this.currentUser);
+
 	}
 
 	createRecipe(recipe: Recipe) {
@@ -50,6 +55,7 @@ export class RecipesListService {
 	}
 
 	deleteRecipe(id: number) {
+    console.log('deleteRecipe ' + id);
 		return this.request('delete', `${baseUrl}/recipes/${id}`);
   }
 

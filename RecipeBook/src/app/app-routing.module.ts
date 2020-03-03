@@ -18,6 +18,16 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard]
   },
   {
+    path: 'recipes/:id',
+    component: RecipeComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'newrecipe',
+    component: RecipeComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
     path: 'weeklyplanner',
     component: MealPlannerComponent,
     canActivate: [OktaAuthGuard]
@@ -26,12 +36,12 @@ const routes: Routes = [
     path: 'implicit/callback',
     component: OktaCallbackComponent,
     // canActivate: [OktaAuthGuard]
-  },
-  {
-    path: 'recipe',
-    component: RecipeComponent,
-    // canActivate: [OktaAuthGuard]
   }
+  // {
+  //   path: 'recipe',
+  //   component: RecipeComponent,
+  //   // canActivate: [OktaAuthGuard]
+  // }
 ];
 
 // Require authentication on every route

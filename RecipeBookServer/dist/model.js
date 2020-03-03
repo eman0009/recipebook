@@ -26,7 +26,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Recipe.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Generated(),
+    typeorm_1.Column(),
     __metadata("design:type", String)
 ], Recipe.prototype, "userId", void 0);
 __decorate([

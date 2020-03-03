@@ -2,13 +2,15 @@ import { NextFunction, Request, Response, Router } from 'express';
 import { getRecipeRepository,  Recipe } from './model';
 import { isBoolean } from 'util';
 // import {getMongoRepository, getMongoManager} from "typeorm";
+// import { OktaAuthService } from '@okta/okta-angular';
 
 export const router: Router = Router();
 
 router.get('/recipes', async function(req: Request, res: Response, next: NextFunction){
     try {
         const recipeRepository = await getRecipeRepository();
-        const allRecipes = await recipeRepository.find();
+        const allRecipes = await recipeRepository.find({ where: { userId: req.body.user.email } });
+
         res.json(allRecipes);
     }
     catch (err) {
@@ -19,7 +21,7 @@ router.get('/recipes', async function(req: Request, res: Response, next: NextFun
 router.get('/recipes/:id', async function(req: Request, res: Response, next: NextFunction){
     try {
         const recipeRepository = await getRecipeRepository();
-        const recipe = await recipeRepository.find({id: req.body.id});
+        const recipe = await recipeRepository.findOne(req.params.id);
         res.json(recipe);
     }
     catch (err) {
@@ -105,9 +107,6 @@ router.post('/recipes/:id', async function (req: Request, res: Response, next: N
         const result = await recipeRepository.save(recipe);
 
         res.send(result);
-
-        // res.sendStatus(200);
-
     }
     catch (err) {
         return next(err);
@@ -116,11 +115,10 @@ router.post('/recipes/:id', async function (req: Request, res: Response, next: N
 
 router.delete('/recipes/:id', async function (req: Request, res: Response, next: NextFunction) {
     try {
+
         const recipeRepository = await getRecipeRepository();
-        await recipeRepository.delete({id: req.body.id});
-         
-        // res.send('OK');
-        // res.sendStatus(201);
+        const result = await recipeRepository.delete(req.params.id);
+        res.send(result);
 
 
     }

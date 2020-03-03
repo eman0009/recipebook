@@ -1,6 +1,6 @@
 export class Recipe {
     id?: string;
-    userId: string;
+    userId?: string;
     recipeTitle: string;
     ingredients: string;
     howToPrepare: string;
