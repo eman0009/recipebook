@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   logout() {
     this.oktaAuth.logout('/');
 
-    window.location.reload();
+    // window.location.reload();
     // window.location.href = 'http://localhost:4200/';
   }
 

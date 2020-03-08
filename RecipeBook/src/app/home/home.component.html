@@ -42,8 +42,10 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"
-          class="element-row" ></mat-row>
+        <mat-row (click)="recipeInformation()" *matRowDef="let row; columns: displayedColumns;"
+          class="element-row"
+
+        ></mat-row>
 
       </mat-table>
     <!--
@@ -52,7 +54,9 @@
       </div> -->
     </div>
 
-
+    <div class="dialog">
+      <button mat-raised-button (click)="showDialog()" color="primary">Show Dialog</button>
+    </div>
 <div class="hero">
   <div class="boarder">
     <div class="recommended_recipe">

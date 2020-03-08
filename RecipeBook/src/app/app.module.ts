@@ -24,7 +24,7 @@ import { OktaAuthModule } from '@okta/okta-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent, DialogComponent } from './home/home.component';
 import { MealPlannerComponent } from './meal-planner/meal-planner.component';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 import { RecipeComponent, TesteDeArray } from './recipe/recipe.component';
@@ -37,7 +37,8 @@ import { RecipeComponent, TesteDeArray } from './recipe/recipe.component';
     MealPlannerComponent,
     RecipesListComponent,
     RecipeComponent,
-    TesteDeArray
+    TesteDeArray,
+    DialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -63,6 +64,9 @@ import { RecipeComponent, TesteDeArray } from './recipe/recipe.component';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule
+  ],
+  entryComponents: [
+    DialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

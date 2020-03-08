@@ -5,6 +5,8 @@ import { json } from 'express';
 import { element } from 'protractor';
 // import {MatInputModule} from '@angular/material/input';
 import { MatTableDataSource } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material';
 
 
 
@@ -21,7 +23,7 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['title', 'calories', 'cautions', 'dietLabels', 'healthLabels', 'totalTime'];
   dataSource = new MatTableDataSource<any>();
 
-  constructor(public homeService: HomeService){
+  constructor(public homeService: HomeService, public dialog: MatDialog){
   }
 
   ngOnInit() {
@@ -55,5 +57,36 @@ export class HomeComponent implements OnInit {
 
   }
 
+  recipeInformation(){
+    alert('Recipe from Edaman - details');
+  }
+
+  showDialog(){
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '450px',
+      height: '200px'
+    });
+    setTimeout(() => {
+      dialogRef.close();
+    }, 10000);
+  }
+
+
+
+}
+
+
+@Component({
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class DialogComponent implements OnInit {
+
+  constructor(public dialogRef: MatDialogRef<DialogComponent>,
+  ) { }
+
+  ngOnInit() {
+  }
 
 }

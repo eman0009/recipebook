@@ -29,7 +29,7 @@ export class RecipeComponent implements OnInit {
       if(params.has('id')){
         this.recipeService.getRecipe(Number.parseInt(params.get('id'))).then(r =>{
           this.recipe = r;
-          this.ingredientsInArray = this.recipe.ingredients.split(',')
+          // this.ingredientsInArray = this.recipe.ingredients.split(',')
         })
       }
     });
@@ -69,12 +69,12 @@ export class RecipeComponent implements OnInit {
 
   addIngredient(){
     this.ingredientsInArray.push('');
-    this.recipe.ingredients += "|" + this.ingredientBeingAdded;
+    // this.recipe.ingredients += "|" + this.ingredientBeingAdded;
   }
 
   deleteIngredient(i: number, ingredient: string){
     console.log(i);
-    this.recipe.ingredients = this.recipe.ingredients.replace(new RegExp('/.n/'), '');
+    // this.recipe.ingredients = this.recipe.ingredients.replace(new RegExp('/.n/'), '');
     this.ingredientsInArray.splice(i, 1);
   }
 
