@@ -5,6 +5,8 @@
     <button mat-button routerLink="/"><mat-icon>home</mat-icon></button>
     <button mat-button routerLink="/recipes">My Recipes</button>
     <button mat-button routerLink="/weeklyplanner">Weekly Planner</button>
+    <button mat-button routerLink="/gnet">GNET</button>
+
     <button mat-button *ngIf="!isAuthenticated" (click)="login()"> Login </button>
 
     <button mat-button [matMenuTriggerFor]="afterMenu" *ngIf="isAuthenticated">{{userName}}

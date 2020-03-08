@@ -28,6 +28,7 @@ import { HomeComponent, DialogComponent } from './home/home.component';
 import { MealPlannerComponent } from './meal-planner/meal-planner.component';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 import { RecipeComponent, TesteDeArray } from './recipe/recipe.component';
+import { GNETComponent } from './gnet/gnet.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { RecipeComponent, TesteDeArray } from './recipe/recipe.component';
     RecipesListComponent,
     RecipeComponent,
     TesteDeArray,
-    DialogComponent
+    DialogComponent,
+    GNETComponent
   ],
   imports: [
     AppRoutingModule,
