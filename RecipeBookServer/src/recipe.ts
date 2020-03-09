@@ -35,16 +35,17 @@ router.post('/recipes', async function (req: Request, res: Response, next: NextF
         const recipe = new Recipe();
         recipe.userId = req.body.userId;
         recipe.recipeTitle = req.body.recipeTitle;
+        recipe.dietLabels = req.body.dietLabels;
+        recipe.healthLabels = req.body.healthLabels;
+        recipe.cautions = req.body.cautions;
         recipe.ingredients = req.body.ingredients;
-        recipe.howToPrepare = req.body.howToPrepare;
-        recipe.timeToPrepareInMinutes = req.body.timeToPrepareInMinutes;
         recipe.calories = req.body.calories;
+        recipe.timeToPrepareInMinutes = req.body.timeToPrepareInMinutes;
+        recipe.howToPrepare = req.body.howToPrepare;
         recipe.nutritionalValue = req.body.nutritionalValue;
         recipe.additionalInfo = req.body.additionalInfo;
-        recipe.glutenFree = req.body.glutenFree == "true";
-        recipe.vegan = req.body.vegan == "true";
-        recipe.diabeticFriendly = req.body.diabeticFriendly == "true";
-        recipe.riskOfAllergies = req.body.riskOfAllergies == "true";
+        recipe.linkToImage = req.body.linkToImage;
+        recipe.externalLink = req.body.externalLink;
         recipe.isFavorite = req.body.isFavorite == "true";
 
         // console.log(`${recipe.userId}\n
@@ -77,16 +78,17 @@ router.post('/recipes/:id', async function (req: Request, res: Response, next: N
         const recipe = await recipeRepository.findOne({id: req.body.id});
         recipe.userId = req.body.userId;
         recipe.recipeTitle = req.body.recipeTitle;
+        recipe.dietLabels = req.body.dietLabels;
+        recipe.healthLabels = req.body.healthLabels;
+        recipe.cautions = req.body.cautions;
         recipe.ingredients = req.body.ingredients;
-        recipe.howToPrepare = req.body.howToPrepare;
-        recipe.timeToPrepareInMinutes = req.body.timeToPrepareInMinutes;
         recipe.calories = req.body.calories;
+        recipe.timeToPrepareInMinutes = req.body.timeToPrepareInMinutes;
+        recipe.howToPrepare = req.body.howToPrepare;
         recipe.nutritionalValue = req.body.nutritionalValue;
         recipe.additionalInfo = req.body.additionalInfo;
-        recipe.glutenFree = JSON.parse(req.body.glutenFree);
-        recipe.vegan = JSON.parse(req.body.vegan);
-        recipe.diabeticFriendly = JSON.parse(req.body.diabeticFriendly);
-        recipe.riskOfAllergies = JSON.parse(req.body.riskOfAllergies);
+        recipe.linkToImage = req.body.linkToImage;
+        recipe.externalLink = req.body.externalLink;
         recipe.isFavorite = JSON.parse(req.body.isFavorite);
 
         // console.log(`${recipe.userId}\n

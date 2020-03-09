@@ -17,8 +17,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 export class RecipeComponent implements OnInit {
   recipe: Recipe = new Recipe();
   form: FormGroup;
-  ingredientsInArray: string[];
-  ingredientBeingAdded: string;
+  // ingredientsInArray: string[];
+  // ingredientBeingAdded: string;
 
   constructor(private recipeService: RecipesListService, private route: ActivatedRoute, private router: Router, private _location: Location, private fb: FormBuilder, private oktaAuth: OktaAuthService) {
 
@@ -67,16 +67,22 @@ export class RecipeComponent implements OnInit {
 
   }
 
-  addIngredient(){
-    this.ingredientsInArray.push('');
-    // this.recipe.ingredients += "|" + this.ingredientBeingAdded;
+  // addIngredient(){
+  //   this.ingredientsInArray.push('');
+  //   // this.recipe.ingredients += "|" + this.ingredientBeingAdded;
+  // }
+
+  // deleteIngredient(i: number, ingredient: string){
+  //   console.log(i);
+  //   // this.recipe.ingredients = this.recipe.ingredients.replace(new RegExp('/.n/'), '');
+  //   this.ingredientsInArray.splice(i, 1);
+  // }
+
+  toggleFavorite(){
+    this.recipe.isFavorite = !this.recipe.isFavorite;
+    // this.recipeService.updateRecipe(recipe);
   }
 
-  deleteIngredient(i: number, ingredient: string){
-    console.log(i);
-    // this.recipe.ingredients = this.recipe.ingredients.replace(new RegExp('/.n/'), '');
-    this.ingredientsInArray.splice(i, 1);
-  }
 
 }
 

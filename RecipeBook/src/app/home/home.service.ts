@@ -33,11 +33,21 @@ export class HomeService {
 		});
 	}
 
-  async searchRecipeByIngredient(ingredient : string){
+  async searchRecipeByIngredient(ingredient : string, dietLabel: string){
     // ingredient = 'chicken';
-    console.log('SEARCHING BY INGREDIENT at HomeService: ' + ingredient);
+    var searchPath = `${baseUrl}?q=${ingredient}&app_id=${app_id}&app_key=${app_key}`;
 
-    return this.request('get', `${baseUrl}?q=${ingredient}&app_id=${app_id}&app_key=${app_key}`);
+    console.log('SEARCHING BY INGREDIENT at HomeService: ' + ingredient + " diet = " + dietLabel);
+
+    if(dietLabel != undefined && dietLabel != null && dietLabel != ''){
+    console.log('THEREISS VALUEEE ' + dietLabel);
+
+      searchPath += `&diet=${dietLabel}`;
+      console.log('PATH  ' + searchPath);
+
+    }
+
+    return this.request('get', searchPath);
   }
 
   // async user(){

@@ -34,21 +34,33 @@ __decorate([
     __metadata("design:type", String)
 ], Recipe.prototype, "recipeTitle", void 0);
 __decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], Recipe.prototype, "dietLabels", void 0);
+__decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], Recipe.prototype, "healthLabels", void 0);
+__decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], Recipe.prototype, "cautions", void 0);
+__decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], Recipe.prototype, "ingredients", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Recipe.prototype, "howToPrepare", void 0);
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", Number)
+], Recipe.prototype, "calories", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ nullable: true }),
     __metadata("design:type", Number)
 ], Recipe.prototype, "timeToPrepareInMinutes", void 0);
 __decorate([
     typeorm_1.Column({ nullable: true }),
-    __metadata("design:type", Number)
-], Recipe.prototype, "calories", void 0);
+    __metadata("design:type", String)
+], Recipe.prototype, "howToPrepare", void 0);
 __decorate([
     typeorm_1.Column({ nullable: true }),
     __metadata("design:type", String)
@@ -58,21 +70,13 @@ __decorate([
     __metadata("design:type", String)
 ], Recipe.prototype, "additionalInfo", void 0);
 __decorate([
-    typeorm_1.Column('boolean'),
-    __metadata("design:type", Boolean)
-], Recipe.prototype, "glutenFree", void 0);
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], Recipe.prototype, "linkToImage", void 0);
 __decorate([
-    typeorm_1.Column('boolean'),
-    __metadata("design:type", Boolean)
-], Recipe.prototype, "vegan", void 0);
-__decorate([
-    typeorm_1.Column('boolean'),
-    __metadata("design:type", Boolean)
-], Recipe.prototype, "diabeticFriendly", void 0);
-__decorate([
-    typeorm_1.Column('boolean'),
-    __metadata("design:type", Boolean)
-], Recipe.prototype, "riskOfAllergies", void 0);
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], Recipe.prototype, "externalLink", void 0);
 __decorate([
     typeorm_1.Column('boolean'),
     typeorm_1.Column({ nullable: true }),
@@ -99,41 +103,3 @@ function getRecipeRepository() {
     });
 }
 exports.getRecipeRepository = getRecipeRepository;
-//   const connectionString = 'mongodb+srv://gustavo_adami:algonquin123@recipebook-of5pu.azure.mongodb.net/test?retryWrites=true&w=majority';
-// export async function getRecipeRepository(): Promise<Repository<Recipe>> {
-//     if (connection===undefined) {
-//         connection = await createConnection(
-//             {
-//             type: 'mongodb',
-//             url: connectionString
-//             // database: 'recipebookdb',
-//             // synchronize: true,
-//             // entities: [
-//             //     Recipe
-//             // ],
-//         });
-//         connection.connect();
-//         console.log('Connected to ' + connection + ' + ');
-//         return connection.getRepository(Recipe);
-//     }
-// }
-// var dBConnOptions = {
-//     useNewUrlParser: true
-// }
-// mongoose.connect(connectionString, dBConnOptions); 
-// const connection = createConnection({
-//     type: "mongodb",
-//     // useNewUrlParser: true,
-//     url: "mongodb://admin:password@testcluster0-shard-00-00-1cmyo.mongodb.net:27017,testcluster0-shard-00-01-1cmyo.mongodb.net:27017,testcluster0-shard-00-02-1cmyo.mongodb.net:27017/test?ssl=true&replicaSet=TestCluster0-shard-0&authSource=admin&retryWrites=true",
-//     ssl: true,
-//     authSource: "admin",
-//     replicaSet: "TestCluster0-shard-0"
-// })
-// connection.getRepository(Recipe);
-// const uri = 'mongodb+srv://gustavo_adami:algonquin123@recipebook-of5pu.azure.mongodb.net/test?retryWrites=true&w=majority';
-// const client = new MongoClient(connectionString, { , useNewUrlParser: true });
-// client.connect(err => {
-//   const collection = client.db("recipebookdb").collection("recipe");
-//   // perform actions on the collection object
-//   client.close();
-// });

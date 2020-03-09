@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Recipe } from './recipe';
 
-const baseUrl = 'http://localhost:4201';
+const baseUrl = 'http://192.168.0.25:4201';
 
 @Injectable({
   providedIn: 'root'

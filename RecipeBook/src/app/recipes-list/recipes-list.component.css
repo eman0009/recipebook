@@ -40,3 +40,7 @@
     /* position: fixed; */
     position: relative;
   }
+
+  .favoriteStar {
+    color: orange;
+  }

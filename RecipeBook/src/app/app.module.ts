@@ -57,7 +57,7 @@ import { GNETComponent } from './gnet/gnet.component';
     MatProgressSpinnerModule,
     OktaAuthModule.initAuth({
       issuer: 'https://dev-810851.okta.com/oauth2/default',
-      redirectUri: 'http://localhost:4200/implicit/callback',
+      redirectUri: 'http://192.168.0.25:4200/implicit/callback',
       clientId: '0oa1a9g8grSMSPfQp4x6'
     }),
     FormsModule,

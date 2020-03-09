@@ -2,16 +2,42 @@
 <div>
   <button mat-flat-button color="primary" (click)="createRecipe()">Create Recipe</button>
 </div>
+
+<div fxLayout fxLayoutAlign="center">
+  <!-- <label for="typeText">Filter by Text
+    <input type="radio" id="typeText" name="typeOfFilter" value="true" [(ngModel)]="typeOfFilter" />
+  </label>
+
+  <label for="typeFavorite">Filter by Favorites
+    <input type="radio" id="typeFavorite" name="typeOfFilter" value="false" [(ngModel)]="typeOfFilter" />
+  </label> -->
+  <mat-form-field fxFlex="100%" fxFlex.gt-sm="20%">
+    <input matInput type="text" ng-checked="!typeText" [(ngModel)]="filter" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <button mat-icon-button (click)="filterFavorites($event.target.value)">
+    <mat-icon class="favoriteStar">{{(favoritesFilter==true)?'star':'star_border'}}</mat-icon>
+  </button>
+
+  <button mat-icon-button (click)="clearFilter()">
+    <mat-icon class="clearFilter">close</mat-icon>
+  </button>
+</div>
+<!--
+<div fxLayout fxLayoutAlign="center">
+
+</div> -->
+
 <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" class="recipes">
   <mat-table fxFlex="100%" fxFlex.gt-sm="80%" [dataSource]="dataSource" class="mat-elevation-z1">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
       <mat-cell *matCellDef="let recipe">{{recipe.id}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="userId">
+    <!-- <ng-container matColumnDef="userId">
       <mat-header-cell *matHeaderCellDef>User ID</mat-header-cell>
       <mat-cell *matCellDef="let recipe">{{recipe.userId}}</mat-cell>
-    </ng-container>
+    </ng-container> -->
     <ng-container matColumnDef="recipeTitle">
       <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
       <mat-cell *matCellDef="let recipe"> {{recipe.recipeTitle}}</mat-cell>
@@ -19,11 +45,8 @@
     <!-- <ng-container matColumnDef="ingredients">
       <th mat-header-cell *matHeaderCellDef>Ingredients</th>
       <td mat-cell *matCellDef="let recipe"> {{recipe.ingredients}}</td>
-    </ng-container>
-    <ng-container matColumnDef="howToPrepare">
-      <th mat-header-cell *matHeaderCellDef>How To Prepare</th>
-      <td mat-cell *matCellDef="let recipe"> {{recipe.howToPrepare}}</td>
-    </ng-container> -->
+    </ng-container>-->
+
     <ng-container matColumnDef="timeToPrepareInMinutes">
       <mat-header-cell *matHeaderCellDef>Time to Prepare (Minutes)</mat-header-cell>
       <mat-cell *matCellDef="let recipe"> {{recipe.timeToPrepareInMinutes}}</mat-cell>
@@ -32,49 +55,36 @@
       <mat-header-cell *matHeaderCellDef>Calories</mat-header-cell>
       <mat-cell *matCellDef="let recipe"> {{recipe.calories}}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="cautions">
+      <mat-header-cell *matHeaderCellDef>Cautions</mat-header-cell>
+      <mat-cell *matCellDef="let recipe"> {{recipe.cautions}}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="nutritionalValue">
       <mat-header-cell *matHeaderCellDef>Nutritional Value</mat-header-cell>
       <mat-cell *matCellDef="let recipe"> {{recipe.nutritionalValue}}</mat-cell>
     </ng-container>
-    <!-- <ng-container matColumnDef="additionalInfo">
-      <th mat-header-cell *matHeaderCellDef>Additional Info</th>
-      <td mat-cell *matCellDef="let recipe"> {{recipe.additionalInfo}}</td>
-    </ng-container> -->
-    <ng-container matColumnDef="glutenFree">
-      <mat-header-cell *matHeaderCellDef>Gluten Free</mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.glutenFree}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="vegan">
-      <mat-header-cell *matHeaderCellDef>Vegan<mat-icon >eco</mat-icon></mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.vegan}}</mat-cell>
-      <!-- {{(selectedRecipe.id!==undefined)?'Update':'Create'}} -->
-    </ng-container>
-    <ng-container matColumnDef="diabeticFriendly">
-      <mat-header-cell *matHeaderCellDef>Diabetic Friendly</mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.diabeticFriendly}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="riskOfAllergies">
-      <mat-header-cell *matHeaderCellDef>Risk Of Allergies</mat-header-cell>
-      <mat-cell *matCellDef="let recipe"> {{recipe.riskOfAllergies}}</mat-cell>
 
-    </ng-container>
-    <!-- <ng-container matColumnDef="isFavorite">
-      <th mat-header-cell *matHeaderCellDef>Favorite</th>
-      <td mat-cell *matCellDef="let recipe"> {{recipe.isFavorite}}</td>
-    </ng-container> -->
-    <ng-container matColumnDef="edit">
+    <ng-container matColumnDef="isFavorite">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+      <mat-cell *matCellDef="let recipe">
+        <button mat-icon-button (click)="toggleFavorite(recipe)">
+          <mat-icon class="favoriteStar">{{(recipe.isFavorite==true)?'star':'star_border'}}</mat-icon>
+        </button>
+    </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
       <mat-cell *matCellDef="let recipe">
         <button mat-icon-button [routerLink]="['/recipes', recipe.id]" >
-          <mat-icon>edit</mat-icon>
+          <mat-icon>reorder</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let recipe">
-        <button mat-icon-button (click)="deleteRecipe(recipe.id)">
-        <!-- <button mat-icon-button> -->
+        <button mat-icon-button color="warn" (click)="deleteRecipe(recipe.id)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

@@ -12,11 +12,16 @@ import { Recipe } from './recipe';
   styleUrls: ['./recipes-list.component.css']
 })
 export class RecipesListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'userId', 'recipeTitle', /*'ingredients', 'howToPrepare',*/ 'timeToPrepareInMinutes', 'calories', /*'nutritionalValue', 'additionalInfo',*/ 'glutenFree', 'vegan', 'diabeticFriendly', 'riskOfAllergies', /*'isFavorite'*/ 'edit', 'delete'];
+  displayedColumns: string[] = ['id', /*'userId',*/ 'recipeTitle', 'timeToPrepareInMinutes', 'calories', 'cautions', 'edit', 'delete', 'isFavorite'];
   dataSource = new MatTableDataSource<any>();
 
   selectedRecipe: Recipe = new Recipe();
   loading = false;
+
+  favoritesFilter = false;
+  filter: string;
+
+  // typeOfFilter: boolean;
 
   constructor(public recipeService: RecipesListService, private router: Router){
   }
@@ -54,11 +59,37 @@ export class RecipesListComponent implements OnInit {
 			this.recipeService.deleteRecipe(id);
 
 		}
-		await this.refresh();
+    this.refresh();
+		this.refresh();
+
   }
 
   getRecord(recipe : Recipe){
     return recipe;
+  }
+
+  toggleFavorite(recipe: Recipe){
+    recipe.isFavorite = !recipe.isFavorite;
+    this.recipeService.updateRecipe(recipe);
+  }
+
+  doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  filterFavorites = (value: boolean) => {
+    this.favoritesFilter = !this.favoritesFilter;
+    if(this.favoritesFilter)
+      this.dataSource.filter = "true";
+    else
+    this.dataSource.filter = "false";
+  }
+
+  clearFilter() {
+    this.favoritesFilter = false;
+    this.dataSource.filter = "";
+    this.filter = "";
+
   }
 
 
